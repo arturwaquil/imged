@@ -4,7 +4,6 @@ from tkinter import messagebox
 import cv2
 import PIL.Image
 import PIL.ImageTk
-# import numpy as np
 
 class GUI(Tk):
 
@@ -29,6 +28,16 @@ class GUI(Tk):
 		self.buttonFlipVer 	= Button(butFrame, text='Flip Vertically', 	command=self.flip('VERTICAL')	).pack(fill=BOTH, expand=1)
 		self.buttonGray 	= Button(butFrame, text='Grayscale', 		command=self.grayscale			).pack(fill=BOTH, expand=1)
 		self.buttonQuant 	= Button(butFrame, text='Quantization', 	command=self.quantization		).pack(fill=BOTH, expand=1) 
+		self.buttonBright	= Button(butFrame, text='Brightness',		command=self.brightness			).pack(fill=BOTH, expand=1)
+		self.buttonContrast	= Button(butFrame, text='Contrast',			command=self.contrast			).pack(fill=BOTH, expand=1)
+		self.buttonNeg		= Button(butFrame, text='Negative',			command=self.negative			).pack(fill=BOTH, expand=1)
+		self.buttonHist		= Button(butFrame, text='Histogram',		command=self.histogram			).pack(fill=BOTH, expand=1)
+		self.buttonEqualize	= Button(butFrame, text='Equalize Histo',	command=self.equalizeHistograms	).pack(fill=BOTH, expand=1)
+		self.buttonMatch	= Button(butFrame, text='Match Histos',		command=self.matchHistograms	).pack(fill=BOTH, expand=1)
+		self.buttonZoomIn	= Button(butFrame, text='Zoom In',			command=self.zoom('IN')			).pack(fill=BOTH, expand=1) # just 1 method?
+		self.buttonZoomOut	= Button(butFrame, text='Zoom Out',			command=self.zoom('OUT')		).pack(fill=BOTH, expand=1)
+		self.buttonRotate	= Button(butFrame, text='Rotate',			command=self.rotate				).pack(fill=BOTH, expand=1) # just 1 button?
+		
 
 	def updateLabel(self, img):
 		tempImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)
@@ -71,6 +80,30 @@ class GUI(Tk):
 		self.updateLabel(self.image)
 
 	def quantization(self):
+		pass
+
+	def brightness(self):
+		pass
+
+	def contrast(self):
+		pass
+
+	def negative(self):
+		pass
+
+	def histogram(self):
+		pass
+
+	def equalizeHistograms(self):
+		pass
+
+	def matchHistograms(self):
+		pass
+
+	def zoom(self, direction):
+		pass
+
+	def rotate(self):
 		pass
 
 if __name__ == '__main__':
