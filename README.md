@@ -4,7 +4,7 @@ This is a simple image editor implemented in Python using OpenCV, with a GUI mad
 
 ### TODO list
 - [x] open and save images
-- [ ] flip horizontally and vertically
+- [x] flip horizontally and vertically
 - [x] convert to grayscale
 - [ ] quantize image
 - [ ] adjust brightness and contrast
