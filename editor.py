@@ -99,7 +99,8 @@ class Editor(Tk):
 		pass
 
 	def negative(self):
-		pass
+		self.image[:,:,:] = 255 - self.image[:,:,:]
+		self.updateLabel(self.image)
 
 	def histogram(self):
 		pass
