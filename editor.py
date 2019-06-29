@@ -21,44 +21,36 @@ class Editor(Tk):
 		self.butFrame = Frame(self)
 		self.butFrame.grid(row=0,column=1)
 
-		# buttons here
-		self.buttonQuit		= Button(self.butFrame, text='Quit',		 	command=self.quit)
-		self.buttonOpen		= Button(self.butFrame, text='Open image', 		command=self.openImage)
-		self.buttonSave		= Button(self.butFrame, text='Save image', 		command=self.saveImage)
-		self.flipLabel 		= Label(self.butFrame)
-		self.buttonFlipHor 	= Button(self.flipLabel, text='Flip Horiz',		command=lambda: self.flip('HORIZONTAL'))
-		self.buttonFlipVer 	= Button(self.flipLabel, text='Flip Vert',		command=lambda: self.flip('VERTICAL'))
-		self.buttonGray 	= Button(self.butFrame, text='Grayscale', 		command=self.grayscale)
-		self.buttonQuant 	= Button(self.butFrame, text='Quantization', 	command=self.quantization)
-		self.buttonBright	= Button(self.butFrame, text='Brightness',		command=self.brightness)
-		self.buttonContrast	= Button(self.butFrame, text='Contrast',		command=self.contrast)
-		self.buttonNeg		= Button(self.butFrame, text='Negative',		command=self.negative)
-		self.buttonHist		= Button(self.butFrame, text='Histogram',		command=self.histogram)
-		self.buttonEqualize	= Button(self.butFrame, text='Equalize Histo',	command=self.equalizeHistograms)
-		self.buttonMatch	= Button(self.butFrame, text='Match Histos',	command=self.matchHistograms)
-		self.zoomLabel 		= Label(self.butFrame)
-		self.buttonZoomIn	= Button(self.zoomLabel, text='Zoom In ',		command=lambda: self.zoom('IN'))
-		self.buttonZoomOut	= Button(self.zoomLabel, text='Zoom Out',		command=lambda: self.zoom('OUT'))
-		self.buttonRotate	= Button(self.butFrame, text='Rotate',			command=self.rotate) # just 1 button?
-
-		self.buttonQuit.pack(fill=BOTH)
-		self.buttonOpen.pack(fill=BOTH)
-		self.buttonSave.pack(fill=BOTH)
+		self.buttonQuit			= Button(self.butFrame, 		text='Quit',		 	command=self.quit						).pack(fill=BOTH)
+		self.buttonOpen			= Button(self.butFrame, 		text='Open image', 		command=self.openImage					).pack(fill=BOTH)
+		self.buttonSave			= Button(self.butFrame, 		text='Save image', 		command=self.saveImage					).pack(fill=BOTH)
+		self.flipLabel 			= Label(self.butFrame)
 		self.flipLabel.pack()
-		self.buttonFlipHor.pack(fill=BOTH, side='left')
-		self.buttonFlipVer.pack(fill=BOTH, side='right')
-		self.buttonGray.pack(fill=BOTH)
-		self.buttonQuant.pack(fill=BOTH)
-		self.buttonBright.pack(fill=BOTH)
-		self.buttonContrast.pack(fill=BOTH)
-		self.buttonNeg.pack(fill=BOTH)
-		self.buttonHist.pack(fill=BOTH)
-		self.buttonEqualize.pack(fill=BOTH)
-		self.buttonMatch.pack(fill=BOTH)
+		self.flipText			= Label(self.flipLabel, 		text='Flip:'													).pack(fill=BOTH, side='left')
+		self.buttonFlipHor 		= Button(self.flipLabel,		text='Horiz',			command=lambda: self.flip('HORIZONTAL')	).pack(fill=BOTH, side='left')
+		self.buttonFlipVer 		= Button(self.flipLabel,		text='Vert',			command=lambda: self.flip('VERTICAL')	).pack(fill=BOTH, side='right')
+		self.brightLabel		= Label(self.butFrame)
+		self.brightLabel.pack()
+		self.brightText			= Label(self.brightLabel,		text='Brightness:'												).pack(fill=BOTH, side='left')
+		self.buttonBrightUp		= Button(self.brightLabel,		text='Up',				command=lambda: self.brightness('UP')	).pack(fill=BOTH, side='left')
+		self.buttonBrightDown	= Button(self.brightLabel,		text='Down',			command=lambda: self.brightness('DOWN')	).pack(fill=BOTH, side='right')
+		self.contrastLabel		= Label(self.butFrame)
+		self.contrastLabel.pack()
+		self.contrastText		= Label(self.contrastLabel, 	text='Contrast:'												).pack(fill=BOTH, side='left')
+		self.buttonContrastUp	= Button(self.contrastLabel,	text='Up',				command=lambda: self.contrast('UP')		).pack(fill=BOTH, side='left')
+		self.buttonContrastDown	= Button(self.contrastLabel,	text='Down',			command=lambda: self.contrast('DOWN')	).pack(fill=BOTH, side='right')
+		self.buttonGray 		= Button(self.butFrame, 		text='Grayscale', 		command=self.grayscale 					).pack(fill=BOTH)
+		self.buttonQuant 		= Button(self.butFrame, 		text='Quantization', 	command=self.quantization 				).pack(fill=BOTH)
+		self.buttonNeg			= Button(self.butFrame, 		text='Negative',		command=self.negative 					).pack(fill=BOTH)
+		self.buttonHist			= Button(self.butFrame, 		text='Histogram',		command=self.histogram 					).pack(fill=BOTH)
+		self.buttonEqualize		= Button(self.butFrame, 		text='Equalize Histo',	command=self.equalizeHistograms			).pack(fill=BOTH)
+		self.buttonMatch		= Button(self.butFrame, 		text='Match Histos',	command=self.matchHistograms			).pack(fill=BOTH)
+		self.zoomLabel 			= Label(self.butFrame)
 		self.zoomLabel.pack()
-		self.buttonZoomIn.pack(fill=BOTH, side='left')
-		self.buttonZoomOut.pack(fill=BOTH, side='right')
-		self.buttonRotate.pack(fill=BOTH)
+		self.zoomText			= Label(self.zoomLabel, 		text='Zoom:'													).pack(fill=BOTH, side='left')
+		self.buttonZoomIn		= Button(self.zoomLabel,		text='In ',				command=lambda: self.zoom('IN')			).pack(fill=BOTH, side='left')
+		self.buttonZoomOut		= Button(self.zoomLabel,		text='Out',				command=lambda: self.zoom('OUT')		).pack(fill=BOTH, side='right')
+		self.buttonRotate		= Button(self.butFrame, 		text='Rotate',			command=self.rotate 					).pack(fill=BOTH) # just 1 button?
 
 	def updateLabel(self, img):
 		tempImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)
@@ -89,13 +81,13 @@ class Editor(Tk):
 		if filename:
 			cv2.imwrite(filename, self.image)
 
-	def flip(self, direction):
+	def flip(self, option):
 		h, w, _ = self.image.shape
 		temp = np.zeros((h,w,3), np.uint8)
-		if direction == 'HORIZONTAL':
+		if option == 'HORIZONTAL':
 			for i in range(0,w):
 				temp[:,i,:] = self.image[:,w-i-1,:]
-		elif direction == 'VERTICAL':
+		elif option == 'VERTICAL':
 			for j in range(0,h):
 				temp[j,:,:] = self.image[h-j-1,:,:]
 		self.image = temp
@@ -112,10 +104,10 @@ class Editor(Tk):
 	def quantization(self):
 		pass
 
-	def brightness(self):
+	def brightness(self, option):
 		pass
 
-	def contrast(self):
+	def contrast(self, option):
 		pass
 
 	def negative(self):
@@ -135,6 +127,9 @@ class Editor(Tk):
 		pass
 
 	def rotate(self):
+		pass
+
+	def convolutiom(self, kernel):
 		pass
 
 if __name__ == '__main__':
