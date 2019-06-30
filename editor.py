@@ -81,6 +81,18 @@ class Editor(Tk):
 		if filename:
 			cv2.imwrite(filename, self.image)
 
+	def clamp(self, img):
+		# img = cv2.threshold(img, 255, 255, cv2.THRESH_TRUNC)
+		# img = cv2.threshold(img, 0, 255, cv2.THRESH_TOZERO)
+		# h, w, _ = self.image.shape
+		# for i in range(0,w):
+		# 	for j in range(0,h):
+		# 		for c in range(0,3):
+		# 			img[j,i,c] = 255 if img[j,i,c] > 255 else img[j,i,c]
+		# 			img[j,i,c] = 0 if img[j,i,c] < 0 else img[j,i,c]
+
+		return img
+
 	def flip(self, option):
 		h, w, _ = self.image.shape
 		temp = np.zeros((h,w,3), np.uint8)
@@ -105,10 +117,20 @@ class Editor(Tk):
 		pass
 
 	def brightness(self, option):
-		pass
+		if option == 'UP':
+			bias = 20
+		elif option == 'DOWN':
+			bias = -20
+		self.image = cv2.addWeighted(self.image, 1, np.zeros(self.image.shape, self.image.dtype), 0, bias)
+		self.updateLabel(self.image)
 
 	def contrast(self, option):
-		pass
+		if option == 'UP':
+			gain = 1.25
+		elif option == 'DOWN':
+			gain = 0.8
+		self.image = cv2.addWeighted(self.image, gain, np.zeros(self.image.shape, self.image.dtype), 0, 0)
+		self.updateLabel(self.image)
 
 	def negative(self):
 		self.image[:,:,:] = 255 - self.image[:,:,:]
