@@ -13,5 +13,5 @@ This is a simple image editor implemented in Python using OpenCV, with a GUI mad
 - [ ] equalize histogram
 - [ ] match histograms
 - [ ] zoom in and out
-- [ ] rotate image
+- [x] rotate image
 - [ ] convolve kernels 

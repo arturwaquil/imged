@@ -50,7 +50,11 @@ class Editor(Tk):
 		self.zoomText			= Label(self.zoomLabel, 		text='Zoom:'													).pack(fill=BOTH, side='left')
 		self.buttonZoomIn		= Button(self.zoomLabel,		text='In ',				command=lambda: self.zoom('IN')			).pack(fill=BOTH, side='left')
 		self.buttonZoomOut		= Button(self.zoomLabel,		text='Out',				command=lambda: self.zoom('OUT')		).pack(fill=BOTH, side='right')
-		self.buttonRotate		= Button(self.butFrame, 		text='Rotate',			command=self.rotate 					).pack(fill=BOTH) # just 1 button?
+		self.rotateLabel		= Label(self.butFrame)
+		self.rotateLabel.pack()
+		self.rotateText			= Label(self.rotateLabel, 		text='Rotate:'													).pack(fill=BOTH, side='left')
+		self.buttonRotLeft		= Button(self.rotateLabel,		text='Left',			command=lambda: self.rotate('LEFT')		).pack(fill=BOTH, side='left')
+		self.buttonRotRight		= Button(self.rotateLabel, 		text='Right',			command=lambda: self.rotate('RIGHT')	).pack(fill=BOTH, side='right')
 
 	def updateLabel(self, img):
 		tempImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)
@@ -80,18 +84,6 @@ class Editor(Tk):
 
 		if filename:
 			cv2.imwrite(filename, self.image)
-
-	def clamp(self, img):
-		# img = cv2.threshold(img, 255, 255, cv2.THRESH_TRUNC)
-		# img = cv2.threshold(img, 0, 255, cv2.THRESH_TOZERO)
-		# h, w, _ = self.image.shape
-		# for i in range(0,w):
-		# 	for j in range(0,h):
-		# 		for c in range(0,3):
-		# 			img[j,i,c] = 255 if img[j,i,c] > 255 else img[j,i,c]
-		# 			img[j,i,c] = 0 if img[j,i,c] < 0 else img[j,i,c]
-
-		return img
 
 	def flip(self, option):
 		h, w, _ = self.image.shape
@@ -148,8 +140,17 @@ class Editor(Tk):
 	def zoom(self, direction):
 		pass
 
-	def rotate(self):
-		pass
+	def rotate(self, option):
+		h, w, _ = self.image.shape
+		temp = np.zeros((w,h,3), np.uint8) # null image with inverted dimensions
+		if option == 'LEFT':
+			for i in range(0,w):
+				temp[w-i-1,:,:] = self.image[:,i,:]
+		elif option == 'RIGHT':
+			for j in range(0,h):
+				temp[:,h-j-1,:] = self.image[j,:,:]
+		self.image = temp
+		self.updateLabel(self.image)
 
 	def convolutiom(self, kernel):
 		pass
