@@ -137,8 +137,27 @@ class Editor(Tk):
 	def matchHistograms(self):
 		pass
 
-	def zoom(self, direction):
-		pass
+	def zoom(self, option):
+		h, w, _ = self.image.shape
+		if option == 'IN':# and h < 2000 and w < 2000:
+			temp1 = np.zeros((h,2*w,3), np.uint8)
+			for i in range(0,w):
+				temp1[:,2*i,:] = self.image[:,i,:]
+				temp1[:,2*i+1,:] = self.image[:,i,:]
+			temp = np.zeros((2*h,2*w,3), np.uint8)
+			for j in range(0,h):
+				temp[2*j,:,:] = temp1[j,:,:]
+				temp[2*j+1,:,:] = temp1[j,:,:]
+		elif option == 'OUT' and h > 10 and w > 10:
+			temp1 = np.zeros((h,int(w/2),3), np.uint8)
+			for i in range(0,int(w/2)):
+				temp1[:,i,:] = (self.image[:,2*i,:] + self.image[:,2*i+1,:])/2
+			temp = np.zeros((int(h/2),int(w/2),3), np.uint8)
+			for j in range(0,int(h/2)):
+				temp[j,:,:] = (temp1[2*j,:,:] + temp1[2*j+1,:,:])/2
+
+			self.image = temp
+			self.updateLabel(self.image)
 
 	def rotate(self, option):
 		h, w, _ = self.image.shape
