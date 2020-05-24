@@ -21,40 +21,41 @@ class Editor(Tk):
 		self.butFrame = Frame(self)
 		self.butFrame.grid(row=0,column=1)
 
-		self.buttonQuit			= Button(self.butFrame, 		text='Quit',		 	command=self.quit						).pack(fill=BOTH)
-		self.buttonOpen			= Button(self.butFrame, 		text='Open image', 		command=self.openImage					).pack(fill=BOTH)
-		self.buttonSave			= Button(self.butFrame, 		text='Save image', 		command=self.saveImage					).pack(fill=BOTH)
+		self.buttonQuit			= Button(self.butFrame, 	text='Quit',		 	command=self.quit						).pack(fill=BOTH)
+		self.buttonOpen			= Button(self.butFrame, 	text='Open image', 		command=self.openImage					).pack(fill=BOTH)
+		self.buttonRevert		= Button(self.butFrame, 	text='Revert to original',command=self.revertImage				).pack(fill=BOTH)
+		self.buttonSave			= Button(self.butFrame, 	text='Save image', 		command=self.saveImage					).pack(fill=BOTH)
 		self.flipLabel 			= Label(self.butFrame)
 		self.flipLabel.pack()
-		self.flipText			= Label(self.flipLabel, 		text='Flip:'													).pack(fill=BOTH, side='left')
-		self.buttonFlipHor 		= Button(self.flipLabel,		text='Horiz',			command=lambda: self.flip('HORIZONTAL')	).pack(fill=BOTH, side='left')
-		self.buttonFlipVer 		= Button(self.flipLabel,		text='Vert',			command=lambda: self.flip('VERTICAL')	).pack(fill=BOTH, side='right')
+		self.flipText			= Label(self.flipLabel, 	text='Flip:'													).pack(fill=BOTH, side='left')
+		self.buttonFlipHor 		= Button(self.flipLabel,	text='Horiz',			command=lambda: self.flip('HORIZONTAL')	).pack(fill=BOTH, side='left')
+		self.buttonFlipVer 		= Button(self.flipLabel,	text='Vert',			command=lambda: self.flip('VERTICAL')	).pack(fill=BOTH, side='right')
 		self.brightLabel		= Label(self.butFrame)
 		self.brightLabel.pack()
-		self.brightText			= Label(self.brightLabel,		text='Brightness:'												).pack(fill=BOTH, side='left')
-		self.buttonBrightUp		= Button(self.brightLabel,		text='Up',				command=lambda: self.brightness('UP')	).pack(fill=BOTH, side='left')
-		self.buttonBrightDown	= Button(self.brightLabel,		text='Down',			command=lambda: self.brightness('DOWN')	).pack(fill=BOTH, side='right')
+		self.brightText			= Label(self.brightLabel,	text='Brightness:'												).pack(fill=BOTH, side='left')
+		self.buttonBrightUp		= Button(self.brightLabel,	text='Up',				command=lambda: self.brightness('UP')	).pack(fill=BOTH, side='left')
+		self.buttonBrightDown	= Button(self.brightLabel,	text='Down',			command=lambda: self.brightness('DOWN')	).pack(fill=BOTH, side='right')
 		self.contrastLabel		= Label(self.butFrame)
 		self.contrastLabel.pack()
-		self.contrastText		= Label(self.contrastLabel, 	text='Contrast:'												).pack(fill=BOTH, side='left')
-		self.buttonContrastUp	= Button(self.contrastLabel,	text='Up',				command=lambda: self.contrast('UP')		).pack(fill=BOTH, side='left')
-		self.buttonContrastDown	= Button(self.contrastLabel,	text='Down',			command=lambda: self.contrast('DOWN')	).pack(fill=BOTH, side='right')
-		self.buttonGray 		= Button(self.butFrame, 		text='Grayscale', 		command=self.grayscale 					).pack(fill=BOTH)
-		self.buttonQuant 		= Button(self.butFrame, 		text='Quantization', 	command=self.quantization 				).pack(fill=BOTH)
-		self.buttonNeg			= Button(self.butFrame, 		text='Negative',		command=self.negative 					).pack(fill=BOTH)
-		self.buttonHist			= Button(self.butFrame, 		text='Histogram',		command=self.histogram 					).pack(fill=BOTH)
-		self.buttonEqualize		= Button(self.butFrame, 		text='Equalize Histo',	command=self.equalizeHistograms			).pack(fill=BOTH)
-		self.buttonMatch		= Button(self.butFrame, 		text='Match Histos',	command=self.matchHistograms			).pack(fill=BOTH)
+		self.contrastText		= Label(self.contrastLabel, text='Contrast:'												).pack(fill=BOTH, side='left')
+		self.buttonContrastUp	= Button(self.contrastLabel,text='Up',				command=lambda: self.contrast('UP')		).pack(fill=BOTH, side='left')
+		self.buttonContrastDown	= Button(self.contrastLabel,text='Down',			command=lambda: self.contrast('DOWN')	).pack(fill=BOTH, side='right')
+		self.buttonGray 		= Button(self.butFrame, 	text='Grayscale', 		command=self.grayscale 					).pack(fill=BOTH)
+		self.buttonQuant 		= Button(self.butFrame, 	text='Quantization', 	command=self.quantization 				).pack(fill=BOTH)
+		self.buttonNeg			= Button(self.butFrame, 	text='Negative',		command=self.negative 					).pack(fill=BOTH)
+		self.buttonHist			= Button(self.butFrame, 	text='Histogram',		command=self.histogram 					).pack(fill=BOTH)
+		self.buttonEqualize		= Button(self.butFrame, 	text='Equalize Histo',	command=self.equalizeHistograms			).pack(fill=BOTH)
+		self.buttonMatch		= Button(self.butFrame, 	text='Match Histos',	command=self.matchHistograms			).pack(fill=BOTH)
 		self.zoomLabel 			= Label(self.butFrame)
 		self.zoomLabel.pack()
-		self.zoomText			= Label(self.zoomLabel, 		text='Zoom:'													).pack(fill=BOTH, side='left')
-		self.buttonZoomIn		= Button(self.zoomLabel,		text='In ',				command=lambda: self.zoom('IN')			).pack(fill=BOTH, side='left')
-		self.buttonZoomOut		= Button(self.zoomLabel,		text='Out',				command=lambda: self.zoom('OUT')		).pack(fill=BOTH, side='right')
+		self.zoomText			= Label(self.zoomLabel, 	text='Zoom:'													).pack(fill=BOTH, side='left')
+		self.buttonZoomIn		= Button(self.zoomLabel,	text='In ',				command=lambda: self.zoom('IN')			).pack(fill=BOTH, side='left')
+		self.buttonZoomOut		= Button(self.zoomLabel,	text='Out',				command=lambda: self.zoom('OUT')		).pack(fill=BOTH, side='right')
 		self.rotateLabel		= Label(self.butFrame)
 		self.rotateLabel.pack()
-		self.rotateText			= Label(self.rotateLabel, 		text='Rotate:'													).pack(fill=BOTH, side='left')
-		self.buttonRotLeft		= Button(self.rotateLabel,		text='Left',			command=lambda: self.rotate('LEFT')		).pack(fill=BOTH, side='left')
-		self.buttonRotRight		= Button(self.rotateLabel, 		text='Right',			command=lambda: self.rotate('RIGHT')	).pack(fill=BOTH, side='right')
+		self.rotateText			= Label(self.rotateLabel, 	text='Rotate:'													).pack(fill=BOTH, side='left')
+		self.buttonRotLeft		= Button(self.rotateLabel,	text='Left',			command=lambda: self.rotate('LEFT')		).pack(fill=BOTH, side='left')
+		self.buttonRotRight		= Button(self.rotateLabel, 	text='Right',			command=lambda: self.rotate('RIGHT')	).pack(fill=BOTH, side='right')
 
 	def updateLabel(self, img):
 		tempImg = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)
@@ -73,8 +74,13 @@ class Editor(Tk):
 				messagebox.showerror('Error','An error occurred: <error>')
 
 		if filename:	# if filename is not an empty string
-			self.image = cv2.imread(filename)	
+			self.image = cv2.imread(filename)
+			self.origImage = self.image.copy()
 			self.updateLabel(self.image)
+
+	def revertImage(self):
+		self.image = self.origImage.copy()
+		self.updateLabel(self.image)
 
 	def saveImage(self):
 		try:
@@ -156,8 +162,8 @@ class Editor(Tk):
 			for j in range(0,int(h/2)):
 				temp[j,:,:] = (temp1[2*j,:,:] + temp1[2*j+1,:,:])/2
 
-			self.image = temp
-			self.updateLabel(self.image)
+		self.image = temp
+		self.updateLabel(self.image)
 
 	def rotate(self, option):
 		h, w, _ = self.image.shape
